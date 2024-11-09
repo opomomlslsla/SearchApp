@@ -14,7 +14,7 @@ public class ExceptionHandler(RequestDelegate requestDelegate, ILogger logger)
         {
             await requestDelegate(httpContext);
         }
-        catch(ArgumentException ex)
+        catch (ArgumentException ex)
         {
             logger.Error($"{ex.Message} \n {ex.InnerException} \n {ex.StackTrace} \n");
             string msg = $"{ex.Message}";
@@ -24,7 +24,7 @@ public class ExceptionHandler(RequestDelegate requestDelegate, ILogger logger)
         {
             logger.Error($"{ex.Message} \n {ex.InnerException} \n {ex.StackTrace} \n");
             string msg = $"{ex.Message} \n {ex.InnerException} \n {ex.StackTrace} \n";
-            await HandleExeptionAsync(httpContext, msg, HttpStatusCode.BadRequest);
+            await HandleExeptionAsync(httpContext, msg, HttpStatusCode.InternalServerError);
         }
         catch(Exception ex)
         {
